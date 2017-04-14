@@ -1,0 +1,4 @@
+project=todoapp
+architecture=container
+test=rspec
+template=erb
