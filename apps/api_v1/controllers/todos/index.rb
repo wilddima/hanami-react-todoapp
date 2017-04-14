@@ -1,20 +1,17 @@
 module ApiV1::Controllers::Todos
   class Index
     include ApiV1::Action
+    include JSONAPI::Hanami::Action
 
     def call(params)
-
-      self.body = data.to_json
+      self.data = data
     end
 
     private
 
     def data
-      { data: 
-        { 
-          todos: {}
-        } 
-      }
+      @repo = TodoRepository.new
+      @todos = @repo.all
     end
   end
 end

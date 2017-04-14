@@ -4,6 +4,7 @@ require 'hanami/assets'
 module ApiV1
   class Application < Hanami::Application
     configure do
+      controller.format jsonapi: 'application/vnd.api+json'
       ##
       # BASIC
       #
@@ -20,7 +21,8 @@ module ApiV1
       #
       load_paths << [
         'controllers',
-        'views'
+        'views',
+        'serializers'
       ]
 
       # Handle exceptions with HTTP statuses (true) or don't catch them (false).
