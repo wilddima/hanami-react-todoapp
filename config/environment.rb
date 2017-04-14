@@ -2,9 +2,11 @@ require 'bundler/setup'
 require 'hanami/setup'
 require 'hanami/model'
 require_relative '../lib/todoapp'
+require_relative '../apps/api_v1/application'
 require_relative '../apps/web/application'
 
 Hanami.configure do
+  mount ApiV1::Application, at: '/api/v1'
   mount Web::Application, at: '/'
 
   model do
