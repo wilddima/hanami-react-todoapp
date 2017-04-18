@@ -3,12 +3,14 @@ import PropTypes from 'prop-types'
 import Todo from './Todo'
 
 const TodoList = ({todos, onTodoClick}) => {
+  console.log(todos)
   return(
     <ul>
-      {todos.map((todo, id) => 
+      {todos.data.map((todo, id) => 
         <Todo 
           key={id}
-          {...todo}
+          {...todo.attributes}
+          id={todo.id}
           onClick={() => onTodoClick(id)}
         />
       )}
@@ -17,11 +19,15 @@ const TodoList = ({todos, onTodoClick}) => {
 }
 
 TodoList.propTypes = {
-  todos: PropTypes.arrayOf(PropTypes.shape({
-    // id: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    completed: PropTypes.bool.isRequired
-  }).isRequired).isRequired,
+  todos: PropTypes.shape({
+    data: PropTypes.arrayOf(PropTypes.shape({
+      attributes: PropTypes.object.isRequired,
+      id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired
+    })),
+    isFetching: PropTypes.bool.isRequired,
+    errors: PropTypes.object
+  }).isRequired,
   onTodoClick: PropTypes.func.isRequired
 }
 

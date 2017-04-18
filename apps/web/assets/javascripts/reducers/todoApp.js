@@ -2,7 +2,10 @@ import {
   visibilityFilters,
   SET_VISIBILITY_FILTER,
   ADD_TODO,
-  TOGGLE_TODO
+  TOGGLE_TODO,
+  FETCH_TODOS_REQUEST,
+  FETCH_TODOS_FAILURE,
+  FETCH_TODOS_SUCCESS
  } from '../actions/todos'
 
  import { combineReducers } from 'redux'
@@ -19,8 +22,34 @@ const visibilityFilter = (state = SHOW_ALL, action) => {
   }
 }
 
-const todos = (state = [], action) => {
+const todos = (
+  state = { isFetching: false, errors: {}, data: []},
+  action) => {
   switch(action.type) {
+    case FETCH_TODOS_REQUEST:
+      return(Object.assign({}, state, { isFetching: true }))
+      return(state)
+    case FETCH_TODOS_SUCCESS:
+      return(
+        Object.assign(
+          {},
+          state,
+          { data: action.response.data },
+          { isFetching: false }
+        )
+      )
+    case FETCH_TODOS_FAILURE:
+      return(
+        Object.assign(
+          {},
+          state,
+          { 
+            isFetching: false,
+            errors: action.errors
+          }
+        )
+      )
+      return(state)
     case ADD_TODO:
       return(
         [
@@ -33,16 +62,28 @@ const todos = (state = [], action) => {
       )
     case TOGGLE_TODO:
       return(
-        state.map((todo, id) => {
-          if(id === action.id) {
-            return(Object.assign(
-             {},
-             todo,
-             { completed: !todo.completed }
-            ))
+        Object.assign(
+          {},
+          state,
+          {
+            data: state.data.map((todo, id) => {
+              if(id === action.id) {
+                return(Object.assign(
+                  {},
+                  todo,
+                  { 
+                    attributes: Object.assign({}, todo.attributes,
+                      { 
+                        finished: !todo.attributes.finished 
+                      }
+                    )
+                  }
+                ))
+              }
+              return(todo)
+            })
           }
-          return(todo)
-        })
+        )
       )
     default:
       return(state)
