@@ -8,6 +8,9 @@ export const FETCH_TODOS_REQUEST = 'FETCH_TODOS_REQUEST'
 export const FETCH_TODOS_FAILURE = 'FETCH_TODOS_FAILURE'
 export const FETCH_TODOS_SUCCESS = 'FETCH_TODOS_SUCCESS'
 
+export const CREATE_TODO_REQUEST = 'CREATE_TODOS_REQUEST'
+export const CREATE_TODO_FAILURE = 'CREATE_TODOS_FAILURE'
+
 export const visibilityFilters = {
   SHOW_ALL: 'SHOW_ALL',
   SHOW_COMPLETED: 'SHOW_COMPLETED',
@@ -46,4 +49,22 @@ export const fetchTodosSuccess = (res) => {
 
 export const fetchTodosFailure = (err) => {
   return { type: FETCH_TODOS_FAILURE, error: err }
+}
+
+export const createTodo = (title) => {
+  return((dispatch) => {
+    dispatch(createTodoRequest())
+
+    axios.post('/api/v1/todos', { todo: { title: title} })
+         .then((res) => { dispatch(fetchTodos()) })
+         .catch((err) => { dispatch(createTodoFailure(err)) })
+  })
+}
+
+export const createTodoRequest = () => {
+  return { type: CREATE_TODO_REQUEST }
+}
+
+export const createTodoFailure = (err) => {
+  return { type: CREATE_TODO_FAILURE, error: err }
 }

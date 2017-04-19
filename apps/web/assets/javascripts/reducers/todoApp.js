@@ -5,7 +5,10 @@ import {
   TOGGLE_TODO,
   FETCH_TODOS_REQUEST,
   FETCH_TODOS_FAILURE,
-  FETCH_TODOS_SUCCESS
+  FETCH_TODOS_SUCCESS,
+  CREATE_TODOS_REQUEST,
+  CREATE_TODOS_FAILURE,
+  CREATE_TODOS_SUCCESS
  } from '../actions/todos'
 
  import { combineReducers } from 'redux'
@@ -28,7 +31,6 @@ const todos = (
   switch(action.type) {
     case FETCH_TODOS_REQUEST:
       return(Object.assign({}, state, { isFetching: true }))
-      return(state)
     case FETCH_TODOS_SUCCESS:
       return(
         Object.assign(
@@ -49,7 +51,19 @@ const todos = (
           }
         )
       )
-      return(state)
+    case CREATE_TODOS_REQUEST:
+      return(Object.assign({}, state, { isFetching: true }))
+    case CREATE_TODOS_FAILURE:
+      return(
+        Object.assign(
+          {},
+          state,
+          { 
+            isFetching: false,
+            errors: action.errors
+          }
+        )
+      )
     case ADD_TODO:
       return(
         [

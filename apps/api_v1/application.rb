@@ -118,7 +118,7 @@ module ApiV1
 
       # The layout to be used by all views
       #
-      layout :application # It will load ApiV1::Views::ApplicationLayout
+      # layout :application # It will load ApiV1::Views::ApplicationLayout
 
       # The relative path to templates
       #
