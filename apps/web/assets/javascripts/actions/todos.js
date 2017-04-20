@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-export const ADD_TODO = 'ADD_TODO'
-export const TOGGLE_TODO = 'TOGGLE_TODO'
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
 
 export const FETCH_TODOS_REQUEST = 'FETCH_TODOS_REQUEST'
@@ -11,18 +9,13 @@ export const FETCH_TODOS_SUCCESS = 'FETCH_TODOS_SUCCESS'
 export const CREATE_TODO_REQUEST = 'CREATE_TODOS_REQUEST'
 export const CREATE_TODO_FAILURE = 'CREATE_TODOS_FAILURE'
 
+export const TOGGLE_TODO_REQUEST = 'TOGGLE_TODOS_REQUEST'
+export const TOGGLE_TODO_FAILURE = 'TOGGLE_TODOS_FAILURE'
+
 export const visibilityFilters = {
   SHOW_ALL: 'SHOW_ALL',
   SHOW_COMPLETED: 'SHOW_COMPLETED',
   SHOW_ACTIVE: 'SHOW_ACTIVE'
-}
-
-export const addTodo = (text) => { 
-  return { type: ADD_TODO, text } 
-}
-
-export const toggleTodo = (id) => { 
-  return { type: TOGGLE_TODO, id } 
 }
 
 export const setVisibilityFilter = (filter) => { 
@@ -67,4 +60,22 @@ export const createTodoRequest = () => {
 
 export const createTodoFailure = (err) => {
   return { type: CREATE_TODO_FAILURE, error: err }
+}
+
+export const toggleTodo = (id) => { 
+  return((dispatch) => {
+    dispatch(toggleTodoRequest())
+
+    axios.get(`/api/v1/todos/${id}/toggle`)
+         .then((res) => { dispatch(fetchTodos()) })
+         .catch((err) => { dispatch(createTodoFailure(err)) })
+  })
+}
+
+export const toggleTodoRequest = () => {
+  return { type: TOGGLE_TODO_REQUEST }
+}
+
+export const toggleTodoFailure = (err) => {
+  return { type: TOGGLE_TODO_FAILURE, error: err }
 }

@@ -10,6 +10,7 @@ GEM
   specs:
     addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
+    byebug (9.0.6)
     capybara (2.13.0)
       addressable
       mime-types (>= 1.16)
@@ -100,17 +101,6 @@ GEM
       url_mount (~> 0.2.1)
     ice_nine (0.11.2)
     inflecto (0.0.2)
-    jsonapi-deserializable (0.1.1)
-      jsonapi-parser (= 0.1.1)
-    jsonapi-hanami (0.1.1)
-      jsonapi-rb (= 0.1.1)
-    jsonapi-parser (0.1.1)
-    jsonapi-rb (0.1.1)
-      jsonapi-deserializable (= 0.1.1)
-      jsonapi-serializable (= 0.1.1)
-    jsonapi-renderer (0.1.1)
-    jsonapi-serializable (0.1.1)
-      jsonapi-renderer (= 0.1.1)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
     mime-types (3.1)
@@ -175,12 +165,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  byebug
   capybara
   dotenv (~> 2.0)
   hanami (~> 1.0)
   hanami-model (~> 1.0)
   hanami-webpack!
-  jsonapi-hanami
   pg
   rake
   rspec

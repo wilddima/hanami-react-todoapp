@@ -20,10 +20,10 @@ RSpec.describe ApiV1::Controllers::Todos::Index do
     json_response = JSON.parse(response[2].first)
 
     expect(response[0]).to eq 200
-    expect(response[1]['Content-type']).to eq('application/vnd.api+json; charset=utf-8')
+    expect(response[1]['Content-type']).to eq('application/json; charset=utf-8')
     expect(
-      json_response['data']
-      .first['attributes']['title']
+      json_response['todos']
+      .first['title']
     ).to eq(todo_params[:title])
   end
 end

@@ -4,7 +4,7 @@ gem 'rake'
 gem 'hanami',       '~> 1.0'
 gem 'hanami-model', '~> 1.0'
 gem 'hanami-webpack', github: 'samuelsimoes/hanami-webpack'
-gem 'jsonapi-hanami'
+gem 'byebug'
 
 gem 'pg'
 

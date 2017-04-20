@@ -11,7 +11,7 @@ const getVisibleTodos = (todos, filter) => {
         Object.assign(
           {},
           todos,
-          { data: todos.data.filter(t => t.finished)}
+          { entities: todos.entities.filter(t => t.finished)}
         )
       )
     case 'SHOW_ACTIVE':
@@ -19,7 +19,7 @@ const getVisibleTodos = (todos, filter) => {
         Object.assign(
           {},
           todos,
-          { data: todos.data.filter(t => !t.finished)}
+          { entities: todos.entities.filter(t => !t.finished)}
         )
       )
   }

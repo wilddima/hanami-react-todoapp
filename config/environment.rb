@@ -8,7 +8,6 @@ require_relative '../apps/web/application'
 Hanami.configure do
   mount ApiV1::Application, at: '/api/v1'
   mount Web::Application, at: '/'
-
   model do
     ##
     # Database adapter
