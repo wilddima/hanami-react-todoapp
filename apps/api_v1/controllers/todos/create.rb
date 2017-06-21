@@ -14,7 +14,7 @@ module ApiV1::Controllers::Todos
       if params.valid?
         todo = repo.create(params[:todo])
         self.status = 201
-        self.body = JSON.generate({success: true})
+        self.body = JSON.generate(todo.to_h)
       else
         self.status = 400
         self.body = errors
@@ -26,12 +26,12 @@ module ApiV1::Controllers::Todos
     def errors
       JSON.generate(
         errors: params.error_messages.map do |err|
-                  {
-                    status: 400,
-                    title: err,
-                    detail: err
-                  }
-                end
+          {
+            status: 400,
+            title: err,
+            detail: err
+          }
+        end
       )
     end
   end

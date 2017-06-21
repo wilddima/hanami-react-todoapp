@@ -6,7 +6,7 @@ import {
   FETCH_TODOS_SUCCESS,
   CREATE_TODOS_REQUEST,
   CREATE_TODOS_FAILURE,
-  CREATE_TODOS_SUCCESS,
+  CREATE_TODO_SUCCESS,
   TOGGLE_TODO_REQUEST,
   TOGGLE_TODO_FAILURE
  } from '../actions/todos'
@@ -30,71 +30,21 @@ const todos = (
   action) => {
   switch(action.type) {
     case FETCH_TODOS_REQUEST:
-      return(Object.assign({}, state, { isFetching: true }))
+      return { ...state, isFetching: true }
     case FETCH_TODOS_SUCCESS:
-      return(
-        Object.assign(
-          {},
-          state,
-          { entities: action.response.todos },
-          { isFetching: false }
-        )
-      )
+      return { ...state, entities: action.response.todos, isFetching: false }
     case FETCH_TODOS_FAILURE:
-      return(
-        Object.assign(
-          {},
-          state,
-          { 
-            isFetching: false,
-            errors: action.errors
-          }
-        )
-      )
+      return { ...state, isFetching: false, errors: action.errors }
     case CREATE_TODOS_REQUEST:
-      return(Object.assign({}, state, { isFetching: true }))
+      return { ...state, isFetching: true }
+    case CREATE_TODO_SUCCESS:
+      return { ...state, entities: [ ...state.entities, action.todo] }
     case CREATE_TODOS_FAILURE:
-      return(
-        Object.assign(
-          {},
-          state,
-          { 
-            isFetching: false,
-            errors: action.errors
-          }
-        )
-      )
+      return { ...state, isFetching: false, errors: action.errors }
     case TOGGLE_TODO_REQUEST:
-      return(Object.assign({}, state, { isFetching: true }))
+      return { ...state, isFetching: true }
     case TOGGLE_TODO_FAILURE:
-      return(
-        Object.assign(
-          {},
-          state,
-          { 
-            isFetching: false,
-            errors: action.errors
-          }
-        )
-      )
-    // case TOGGLE_TODO:
-    //   return(Object.assign(
-    //       {},
-    //       state,
-    //       {
-    //         entities: state.entities.map((todo) => {
-    //           if(todo.id === action.id) {
-    //             return(Object.assign(
-    //               {},
-    //               todo,
-    //               { finished: !todo.finished }
-    //             ))
-    //           }
-    //           return(todo)
-    //         })
-    //       }
-    //     )
-    //   )
+      return { ...state, isFetching: false, errors: action.errors }
     default:
       return(state)
   }
