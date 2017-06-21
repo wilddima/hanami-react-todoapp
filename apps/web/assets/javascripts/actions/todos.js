@@ -10,8 +10,9 @@ export const CREATE_TODO_REQUEST = 'CREATE_TODOS_REQUEST'
 export const CREATE_TODO_SUCCESS = 'CREATE_TODO_SUCCESS'
 export const CREATE_TODO_FAILURE = 'CREATE_TODOS_FAILURE'
 
-export const TOGGLE_TODO_REQUEST = 'TOGGLE_TODOS_REQUEST'
-export const TOGGLE_TODO_FAILURE = 'TOGGLE_TODOS_FAILURE'
+export const TOGGLE_TODO_REQUEST = 'TOGGLE_TODO_REQUEST'
+export const TOGGLE_TODO_SUCCESS = 'TOGGLE_TODO_SUCCESS'
+export const TOGGLE_TODO_FAILURE = 'TOGGLE_TODO_FAILURE'
 
 export const visibilityFilters = {
   SHOW_ALL: 'SHOW_ALL',
@@ -77,8 +78,12 @@ export const toggleTodo = (id) => {
   })
 }
 
-export const toggleTodoRequest = () => {
-  return { type: TOGGLE_TODO_REQUEST }
+export const toggleTodoRequest = (id) => {
+  return { type: TOGGLE_TODO_REQUEST, id }
+}
+
+export const toggleTodoSuccess = (res) => {
+  return { type: TOGGLE_TODO_SUCCESS, response: res }
 }
 
 export const toggleTodoFailure = (err) => {

@@ -8,6 +8,7 @@ import {
   CREATE_TODOS_FAILURE,
   CREATE_TODO_SUCCESS,
   TOGGLE_TODO_REQUEST,
+  TOGGLE_TODO_SUCCESS,
   TOGGLE_TODO_FAILURE
  } from '../actions/todos'
 
@@ -42,7 +43,17 @@ const todos = (
     case CREATE_TODOS_FAILURE:
       return { ...state, isFetching: false, errors: action.errors }
     case TOGGLE_TODO_REQUEST:
-      return { ...state, isFetching: true }
+      return { ...state,
+               isFetching: true,
+               entities: state.entities.map(val => {
+                 if (val.id !== action.id) {
+                   return val
+                 }
+                 return { ...val, finished: !val.finished}
+               })
+             }
+    case TOGGLE_TODO_SUCCESS:
+      return { ...state, isFetching: false }
     case TOGGLE_TODO_FAILURE:
       return { ...state, isFetching: false, errors: action.errors }
     default:
