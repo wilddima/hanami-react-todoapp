@@ -10,6 +10,7 @@ const TodoList = ({todos, onTodoClick}) => {
           key={todo.id}
           {...todo}
           onClick={() => onTodoClick(todo.id)}
+          isFetching={todos.isFetching}
         />
       )}
     </ul>

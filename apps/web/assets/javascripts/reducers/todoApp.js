@@ -26,6 +26,8 @@ const visibilityFilter = (state = SHOW_ALL, action) => {
   }
 }
 
+const update = (todo, todos) => todos.map(val => (val.id !== todo.id ? val : todo))
+
 const todos = (
   state = { isFetching: false, errors: {}, entities: []},
   action) => {
@@ -53,7 +55,7 @@ const todos = (
                })
              }
     case TOGGLE_TODO_SUCCESS:
-      return { ...state, isFetching: false }
+      return { ...state, isFetching: false, entities: update(action.response.data, state.entities) }
     case TOGGLE_TODO_FAILURE:
       return { ...state, isFetching: false, errors: action.errors }
     default:
