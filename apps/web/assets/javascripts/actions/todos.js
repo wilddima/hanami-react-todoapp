@@ -73,7 +73,7 @@ export const toggleTodo = (id) => {
     dispatch(toggleTodoRequest(id))
 
     axios.get(`/api/v1/todos/${id}/toggle`)
-         .then((res) => { dispatch(fetchTodos()) })
+         .then((res) => { dispatch(toggleTodoSuccess(res)) })
          .catch((err) => { dispatch(createTodoFailure(err)) })
   })
 }
